@@ -6,7 +6,8 @@ public class PayrollSystem {
     public static void main(String[] args) {
 
         Dashboard db = new Dashboard();
-
         db.setVisible(true);
+        Database.moveToDatabase("payrollDB");
+        db.generateTables();
     }
 }

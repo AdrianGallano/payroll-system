@@ -4,7 +4,10 @@
  */
 package com.mycompany.payrollsystem.UI;
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.mycompany.payrollsystem.Database;
+
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,13 +36,12 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton10 = new javax.swing.JButton();
         container = new javax.swing.JPanel();
         sidePanel = new javax.swing.JPanel();
         topSidePanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        topSidePanelGap = new javax.swing.JPanel();
+        payrollText = new javax.swing.JLabel();
+        systemText = new javax.swing.JLabel();
         employeeContainer = new javax.swing.JPanel();
         employeeLabel = new java.awt.Label();
         addEmployee = new javax.swing.JButton();
@@ -63,22 +65,16 @@ public class Dashboard extends javax.swing.JFrame {
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(50, 50), new java.awt.Dimension(0, 32767));
         Overview = new javax.swing.JTabbedPane();
         employeeTablePanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        employeeTableScroll = new javax.swing.JScrollPane();
+        employeeTable = new javax.swing.JTable();
         departmentTablePanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        departmentTableScroll = new javax.swing.JScrollPane();
+        departmentTable = new javax.swing.JTable();
         positionTablePanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        positionTableScroll = new javax.swing.JScrollPane();
+        positionTable = new javax.swing.JTable();
         bottomMainPanel = new javax.swing.JPanel();
 
-        jButton10.setPreferredSize(new java.awt.Dimension(40, 40));
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Payroll System");
@@ -99,35 +95,35 @@ public class Dashboard extends javax.swing.JFrame {
         topSidePanel.setBackground(new java.awt.Color(38, 38, 38));
         topSidePanel.setPreferredSize(new java.awt.Dimension(200, 200));
 
-        jPanel1.setBackground(new java.awt.Color(38, 38, 38));
-        jPanel1.setPreferredSize(new java.awt.Dimension(40, 50));
+        topSidePanelGap.setBackground(new java.awt.Color(38, 38, 38));
+        topSidePanelGap.setPreferredSize(new java.awt.Dimension(40, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout topSidePanelGapLayout = new javax.swing.GroupLayout(topSidePanelGap);
+        topSidePanelGap.setLayout(topSidePanelGapLayout);
+        topSidePanelGapLayout.setHorizontalGroup(
+            topSidePanelGapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        topSidePanelGapLayout.setVerticalGroup(
+            topSidePanelGapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        topSidePanel.add(jPanel1);
+        topSidePanel.add(topSidePanelGap);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("PAYROLL");
-        jLabel2.setPreferredSize(new java.awt.Dimension(200, 50));
-        topSidePanel.add(jLabel2);
+        payrollText.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        payrollText.setForeground(new java.awt.Color(242, 242, 242));
+        payrollText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        payrollText.setText("PAYROLL");
+        payrollText.setPreferredSize(new java.awt.Dimension(200, 50));
+        topSidePanel.add(payrollText);
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("SYSTEM");
-        jLabel3.setPreferredSize(new java.awt.Dimension(200, 50));
-        topSidePanel.add(jLabel3);
+        systemText.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        systemText.setForeground(new java.awt.Color(242, 242, 242));
+        systemText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        systemText.setText("SYSTEM");
+        systemText.setPreferredSize(new java.awt.Dimension(200, 50));
+        topSidePanel.add(systemText);
 
         sidePanel.add(topSidePanel);
 
@@ -313,29 +309,9 @@ public class Dashboard extends javax.swing.JFrame {
 
         employeeTablePanel.setPreferredSize(new java.awt.Dimension(0, 0));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "First name", "Last name", "Department", "Position"
@@ -356,34 +332,31 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        employeeTableScroll.setViewportView(employeeTable);
+        if (employeeTable.getColumnModel().getColumnCount() > 0) {
+            employeeTable.getColumnModel().getColumn(0).setResizable(false);
+            employeeTable.getColumnModel().getColumn(1).setResizable(false);
+            employeeTable.getColumnModel().getColumn(2).setResizable(false);
+            employeeTable.getColumnModel().getColumn(3).setResizable(false);
+            employeeTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout employeeTablePanelLayout = new javax.swing.GroupLayout(employeeTablePanel);
         employeeTablePanel.setLayout(employeeTablePanelLayout);
         employeeTablePanelLayout.setHorizontalGroup(
             employeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(employeeTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         employeeTablePanelLayout.setVerticalGroup(
             employeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+            .addComponent(employeeTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
         );
 
         Overview.addTab("Employee", employeeTablePanel);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        departmentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "Name"
@@ -404,38 +377,35 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
+        departmentTableScroll.setViewportView(departmentTable);
+        if (departmentTable.getColumnModel().getColumnCount() > 0) {
+            departmentTable.getColumnModel().getColumn(0).setResizable(false);
+            departmentTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout departmentTablePanelLayout = new javax.swing.GroupLayout(departmentTablePanel);
         departmentTablePanel.setLayout(departmentTablePanelLayout);
         departmentTablePanelLayout.setHorizontalGroup(
             departmentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(departmentTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         departmentTablePanelLayout.setVerticalGroup(
             departmentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+            .addComponent(departmentTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
         );
 
         Overview.addTab("Department", departmentTablePanel);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        positionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Teaching / Non Teaching", "Pay rate", "Required Hours"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -449,24 +419,24 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setResizable(false);
-            jTable3.getColumnModel().getColumn(1).setResizable(false);
-            jTable3.getColumnModel().getColumn(2).setResizable(false);
-            jTable3.getColumnModel().getColumn(3).setResizable(false);
-            jTable3.getColumnModel().getColumn(4).setResizable(false);
+        positionTableScroll.setViewportView(positionTable);
+        if (positionTable.getColumnModel().getColumnCount() > 0) {
+            positionTable.getColumnModel().getColumn(0).setResizable(false);
+            positionTable.getColumnModel().getColumn(1).setResizable(false);
+            positionTable.getColumnModel().getColumn(2).setResizable(false);
+            positionTable.getColumnModel().getColumn(3).setResizable(false);
+            positionTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout positionTablePanelLayout = new javax.swing.GroupLayout(positionTablePanel);
         positionTablePanel.setLayout(positionTablePanelLayout);
         positionTablePanelLayout.setHorizontalGroup(
             positionTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(positionTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         positionTablePanelLayout.setVerticalGroup(
             positionTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+            .addComponent(positionTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
         );
 
         Overview.addTab("Position", positionTablePanel);
@@ -497,10 +467,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
 
     private void deleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmployeeActionPerformed
         // TODO add your handling code here:
@@ -538,6 +504,38 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteDepartmentActionPerformed
 
+    public void generateTableEmployeeRecords(String employeeID, String firstName, String lastName, int department, int position){
+        DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
+        Object[] newRecord = {employeeID, firstName, lastName, department, position};
+        model.addRow(newRecord);
+
+        employeeTable.revalidate();
+        employeeTable.repaint();
+    }
+
+    public void generateTableDepartmentRecords(int departmentID, String departmentName){
+        DefaultTableModel model = (DefaultTableModel) departmentTable.getModel();
+        Object[] newRecord = {departmentID, departmentName};
+        model.addRow(newRecord);
+
+        departmentTable.revalidate();
+        departmentTable.repaint();
+    }
+
+    public void generateTablePositionRecords(int positionID, String positionName, boolean isTeaching, int payRate, int requiredHours){
+        DefaultTableModel model = (DefaultTableModel) positionTable.getModel();
+        Object[] newRecord = {positionID, positionName, isTeaching, payRate, requiredHours};
+        model.addRow(newRecord);
+
+        positionTable.revalidate();
+        positionTable.repaint();
+    }
+
+    public void generateTables(){
+        Database.readAllEmployeeRecord(this);
+        Database.readAllDepartmentRecord(this);
+        Database.readAllPositionRecord(this);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane Overview;
@@ -552,32 +550,31 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton deletePosition;
     private javax.swing.JPanel departmentContainer;
     private java.awt.Label departmentLabel;
+    private javax.swing.JTable departmentTable;
     private javax.swing.JPanel departmentTablePanel;
+    private javax.swing.JScrollPane departmentTableScroll;
     private javax.swing.JButton editDepartment;
     private javax.swing.JButton editEmployee;
     private javax.swing.JButton editPosition;
     private javax.swing.JPanel employeeContainer;
     private java.awt.Label employeeLabel;
+    private javax.swing.JTable employeeTable;
     private javax.swing.JPanel employeeTablePanel;
+    private javax.swing.JScrollPane employeeTableScroll;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private java.awt.Label label2;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JLabel payrollText;
     private javax.swing.JPanel positionContainer;
     private java.awt.Label positionLabel;
+    private javax.swing.JTable positionTable;
     private javax.swing.JPanel positionTablePanel;
+    private javax.swing.JScrollPane positionTableScroll;
     private javax.swing.JPanel sidePanel;
+    private javax.swing.JLabel systemText;
     private javax.swing.JPanel topMainPanel;
     private javax.swing.JPanel topSidePanel;
+    private javax.swing.JPanel topSidePanelGap;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,9 +1,12 @@
 package com.mycompany.payrollsystem;
 
+import com.mycompany.payrollsystem.UI.Dashboard;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
 
 // Create -> INSERT INTO
 // Read -> SELECT
@@ -134,7 +137,7 @@ public class Database {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (statement != null) {
                 try {
                     statement.close();
@@ -153,10 +156,9 @@ public class Database {
     }
 
 
-
     // Method overloading for add Record kasi we actually have 3 tables with same functionality
     // Employee
-    static void addRecord(String tableName, String employeeID, String firstName, String lastName, int departmentID, int positionID){ // for employees
+    static void addRecord(String tableName, String employeeID, String firstName, String lastName, int departmentID, int positionID) { // for employees
 
         try {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -170,7 +172,7 @@ public class Database {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (statement != null) {
                 try {
                     statement.close();
@@ -187,7 +189,8 @@ public class Database {
             }
         }
     }
-    static void addRecord(String tableName, String positionName, boolean isTeaching, int payRate, int requiredHours){ // for employees
+
+    static void addRecord(String tableName, String positionName, boolean isTeaching, int payRate, int requiredHours) { // for employees
 
         try {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -201,7 +204,7 @@ public class Database {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (statement != null) {
                 try {
                     statement.close();
@@ -219,7 +222,7 @@ public class Database {
         }
     }
 
-    static void addRecord(String tableName, String departmentName){ // for employees
+    static void addRecord(String tableName, String departmentName) { // for employees
 
         try {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -233,7 +236,7 @@ public class Database {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (statement != null) {
                 try {
                     statement.close();
@@ -251,7 +254,122 @@ public class Database {
         }
     }
 
-    // Read data
-    // Update data
-    // Delete data
+    public static void readAllEmployeeRecord(Dashboard dashboard) { // for employees
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+
+            String readEmployeeRecordStatement = "SELECT * FROM employees";
+
+            ResultSet result = statement.executeQuery(readEmployeeRecordStatement);
+            System.out.println("Read record successful!");
+
+            while (result.next()) {
+                String employeeID = result.getString("employeeID");
+                String firstName = result.getString("firstName");
+                String lastName = result.getString("lastName");
+                int department = result.getInt("department");
+                int position = result.getInt("position");
+                dashboard.generateTableEmployeeRecords(employeeID, firstName, lastName, department, position);
+            }
+
+            result.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+    }
+
+    public static void readAllDepartmentRecord(Dashboard dashboard) { // for employees
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+
+            String readEmployeeRecordStatement = "SELECT * FROM departments";
+
+            ResultSet result = statement.executeQuery(readEmployeeRecordStatement);
+            System.out.println("Read record successful!");
+
+            while (result.next()) {
+                int departmentID = result.getInt("departmentID");
+                String departmentName = result.getString("departmentName");
+                dashboard.generateTableDepartmentRecords(departmentID, departmentName);
+            }
+
+            result.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+        // Update data
+        // Delete data
+
+    }
+    public static void readAllPositionRecord(Dashboard dashboard) { // for employees
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+
+            String readPositionsRecordStatement = "SELECT * FROM positions";
+
+            ResultSet result = statement.executeQuery(readPositionsRecordStatement);
+            System.out.println("Read record successful!");
+
+            while (result.next()) {
+                int positionID = result.getInt("positionID");
+                String positionName = result.getString("positionName");
+                boolean isTeaching = result.getBoolean("isTeaching");
+                int payRate = result.getInt("payRate");
+                int requiredHours = result.getInt("requiredHours");
+                dashboard.generateTablePositionRecords(positionID, positionName, isTeaching, payRate, requiredHours);
+            }
+
+            result.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+    }
 }
