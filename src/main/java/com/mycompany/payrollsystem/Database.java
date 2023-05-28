@@ -153,4 +153,105 @@ public class Database {
     }
 
 
+
+    // Method overloading for add Record kasi we actually have 3 tables with same functionality
+    // Employee
+    static void addRecord(String tableName, String employeeID, String firstName, String lastName, int departmentID, int positionID){ // for employees
+
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+
+            String addRecordStatement = String.format("INSERT INTO `%s`(`employeeID`, `firstName`, `lastName`, `department`, `position`) " +
+                    "VALUES ('%s','%s','%s',%d,%d)", tableName, employeeID, firstName, lastName, departmentID, positionID);
+
+            statement.executeUpdate(addRecordStatement);
+            System.out.println("Add record successful!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+    }
+    static void addRecord(String tableName, String positionName, boolean isTeaching, int payRate, int requiredHours){ // for employees
+
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+
+            String addRecordStatement = String.format("INSERT INTO `%s`(`positionName`, `isTeaching`, `payRate`, `requiredHours`) " +
+                    "VALUES ('%s',%b,%d,%d)", tableName, positionName, isTeaching, payRate, requiredHours);
+
+            statement.executeUpdate(addRecordStatement);
+            System.out.println("Add record successful!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+    }
+
+    static void addRecord(String tableName, String departmentName){ // for employees
+
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+
+            String addRecordStatement = String.format("INSERT INTO `%s`(`departmentName`) " +
+                    "VALUES ('%s')", tableName, departmentName);
+
+            statement.executeUpdate(addRecordStatement);
+            System.out.println("Add record successful!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+    }
+
+    // Read data
+    // Update data
+    // Delete data
 }
