@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-
+import javax.swing.JComboBox;
 // Create -> INSERT INTO
 // Read -> SELECT
 // Update -> UPDATE
@@ -110,25 +110,25 @@ public class Database {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
 
-            String createPositionsTableStatement = "CREATE TABLE positions" +
-                    "(positionID INT AUTO_INCREMENT PRIMARY KEY," +
-                    "positionName VARCHAR(50) NOT NULL," +
-                    "isTeaching BOOLEAN NOT NULL," +
-                    "payRate INT NOT NULL," +
-                    "requiredHours INT NOT NULL);";
+            String createPositionsTableStatement = "CREATE TABLE positions"
+                    + "(positionID INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "positionName VARCHAR(50) NOT NULL,"
+                    + "isTeaching BOOLEAN NOT NULL,"
+                    + "payRate INT NOT NULL,"
+                    + "requiredHours INT NOT NULL);";
 
-            String createDepartmentsTableStatement = "CREATE TABLE departments" +
-                    "(departmentID INT AUTO_INCREMENT PRIMARY KEY," +
-                    "departmentName VARCHAR(100) NOT NULL);";
+            String createDepartmentsTableStatement = "CREATE TABLE departments"
+                    + "(departmentID INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "departmentName VARCHAR(100) NOT NULL);";
 
-            String createEmployeesTableStatement = "CREATE TABLE employees " +
-                    "(employeeID VARCHAR(9) NOT NULL, " +
-                    "firstName VARCHAR(50) NOT NULL, " +
-                    "lastName VARCHAR(50) NOT NULL," +
-                    "department INT NOT NULL," +
-                    "position INT NOT NULL," +
-                    "FOREIGN KEY (position) REFERENCES positions(positionID)," +
-                    "FOREIGN KEY (department) REFERENCES departments(departmentID));";
+            String createEmployeesTableStatement = "CREATE TABLE employees "
+                    + "(employeeID VARCHAR(9) NOT NULL, "
+                    + "firstName VARCHAR(50) NOT NULL, "
+                    + "lastName VARCHAR(50) NOT NULL,"
+                    + "department INT NOT NULL,"
+                    + "position INT NOT NULL,"
+                    + "FOREIGN KEY (position) REFERENCES positions(positionID),"
+                    + "FOREIGN KEY (department) REFERENCES departments(departmentID));";
 
             statement.executeUpdate(createPositionsTableStatement);
             statement.executeUpdate(createDepartmentsTableStatement);
@@ -155,7 +155,6 @@ public class Database {
         }
     }
 
-
     // Method overloading for add Record kasi we actually have 3 tables with same functionality
     // Employee
     static void addRecord(String tableName, String employeeID, String firstName, String lastName, int departmentID, int positionID) { // for employees
@@ -164,8 +163,8 @@ public class Database {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
 
-            String addRecordStatement = String.format("INSERT INTO `%s`(`employeeID`, `firstName`, `lastName`, `department`, `position`) " +
-                    "VALUES ('%s','%s','%s',%d,%d)", tableName, employeeID, firstName, lastName, departmentID, positionID);
+            String addRecordStatement = String.format("INSERT INTO `%s`(`employeeID`, `firstName`, `lastName`, `department`, `position`) "
+                    + "VALUES ('%s','%s','%s',%d,%d)", tableName, employeeID, firstName, lastName, departmentID, positionID);
 
             statement.executeUpdate(addRecordStatement);
             System.out.println("Add record successful!");
@@ -196,8 +195,8 @@ public class Database {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
 
-            String addRecordStatement = String.format("INSERT INTO `%s`(`positionName`, `isTeaching`, `payRate`, `requiredHours`) " +
-                    "VALUES ('%s',%b,%d,%d)", tableName, positionName, isTeaching, payRate, requiredHours);
+            String addRecordStatement = String.format("INSERT INTO `%s`(`positionName`, `isTeaching`, `payRate`, `requiredHours`) "
+                    + "VALUES ('%s',%b,%d,%d)", tableName, positionName, isTeaching, payRate, requiredHours);
 
             statement.executeUpdate(addRecordStatement);
             System.out.println("Add record successful!");
@@ -228,8 +227,8 @@ public class Database {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
 
-            String addRecordStatement = String.format("INSERT INTO `%s`(`departmentName`) " +
-                    "VALUES ('%s')", tableName, departmentName);
+            String addRecordStatement = String.format("INSERT INTO `%s`(`departmentName`) "
+                    + "VALUES ('%s')", tableName, departmentName);
 
             statement.executeUpdate(addRecordStatement);
             System.out.println("Add record successful!");
@@ -333,6 +332,7 @@ public class Database {
         // Delete data
 
     }
+
     public static void readAllPositionRecord(Dashboard dashboard) { // for employees
         try {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -372,4 +372,24 @@ public class Database {
             }
         }
     }
+
+    public static void populateComboBox(JComboBox<String> comboBox, String column, String tableName) {
+        
+       
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+             String query = String.format("SELECT %s FROM %s;", column, tableName);
+            ResultSet resultSet = statement.executeQuery(query);
+            comboBox.removeAllItems();
+
+            while (resultSet.next()) {
+                String data = resultSet.getString(column);
+                comboBox.addItem(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
+

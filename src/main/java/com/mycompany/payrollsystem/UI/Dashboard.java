@@ -3,9 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.payrollsystem.UI;
+
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.mycompany.payrollsystem.Database;
-
+import com.mycompany.payrollsystem.UI.AddRecord.*;
+import java.awt.Dimension;
+import java.awt.Window;
+import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -73,8 +77,8 @@ public class Dashboard extends javax.swing.JFrame {
         positionTablePanel = new javax.swing.JPanel();
         positionTableScroll = new javax.swing.JScrollPane();
         positionTable = new javax.swing.JTable();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         bottomMainPanel = new javax.swing.JPanel();
-
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Payroll System");
@@ -345,11 +349,11 @@ public class Dashboard extends javax.swing.JFrame {
         employeeTablePanel.setLayout(employeeTablePanelLayout);
         employeeTablePanelLayout.setHorizontalGroup(
             employeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(employeeTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(employeeTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
         );
         employeeTablePanelLayout.setVerticalGroup(
             employeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(employeeTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+            .addComponent(employeeTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
         Overview.addTab("Employee", employeeTablePanel);
@@ -387,11 +391,11 @@ public class Dashboard extends javax.swing.JFrame {
         departmentTablePanel.setLayout(departmentTablePanelLayout);
         departmentTablePanelLayout.setHorizontalGroup(
             departmentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(departmentTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(departmentTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
         );
         departmentTablePanelLayout.setVerticalGroup(
             departmentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(departmentTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+            .addComponent(departmentTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
         Overview.addTab("Department", departmentTablePanel);
@@ -432,16 +436,29 @@ public class Dashboard extends javax.swing.JFrame {
         positionTablePanel.setLayout(positionTablePanelLayout);
         positionTablePanelLayout.setHorizontalGroup(
             positionTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(positionTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(positionTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
         );
         positionTablePanelLayout.setVerticalGroup(
             positionTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(positionTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+            .addComponent(positionTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
         Overview.addTab("Position", positionTablePanel);
 
         centerMainPanel.add(Overview, new java.awt.GridBagConstraints());
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        centerMainPanel.add(jDesktopPane1, new java.awt.GridBagConstraints());
 
         mainPanel.add(centerMainPanel, java.awt.BorderLayout.CENTER);
 
@@ -477,11 +494,16 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_editEmployeeActionPerformed
 
     private void addEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeActionPerformed
-        // TODO add your handling code here:
+        AddRecordEmployee addRecordEmployee = new AddRecordEmployee();
+        centerWindow(addRecordEmployee);
+        addRecordEmployee.setVisible(true);
     }//GEN-LAST:event_addEmployeeActionPerformed
 
     private void addPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPositionActionPerformed
-        // TODO add your handling code here:
+        AddRecordPosition addRecordPosition = new AddRecordPosition();
+        centerWindow(addRecordPosition);
+        addRecordPosition.setVisible(true);
+
     }//GEN-LAST:event_addPositionActionPerformed
 
     private void editPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPositionActionPerformed
@@ -493,7 +515,9 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_deletePositionActionPerformed
 
     private void addDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDepartmentActionPerformed
-        // TODO add your handling code here:
+        AddRecordDepartment addRecordDepartment = new AddRecordDepartment();
+        centerWindow(addRecordDepartment);
+        addRecordDepartment.setVisible(true);
     }//GEN-LAST:event_addDepartmentActionPerformed
 
     private void editDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDepartmentActionPerformed
@@ -504,7 +528,7 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteDepartmentActionPerformed
 
-    public void generateTableEmployeeRecords(String employeeID, String firstName, String lastName, int department, int position){
+    public void generateTableEmployeeRecords(String employeeID, String firstName, String lastName, int department, int position) {
         DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
         Object[] newRecord = {employeeID, firstName, lastName, department, position};
         model.addRow(newRecord);
@@ -513,7 +537,7 @@ public class Dashboard extends javax.swing.JFrame {
         employeeTable.repaint();
     }
 
-    public void generateTableDepartmentRecords(int departmentID, String departmentName){
+    public void generateTableDepartmentRecords(int departmentID, String departmentName) {
         DefaultTableModel model = (DefaultTableModel) departmentTable.getModel();
         Object[] newRecord = {departmentID, departmentName};
         model.addRow(newRecord);
@@ -522,7 +546,7 @@ public class Dashboard extends javax.swing.JFrame {
         departmentTable.repaint();
     }
 
-    public void generateTablePositionRecords(int positionID, String positionName, boolean isTeaching, int payRate, int requiredHours){
+    public void generateTablePositionRecords(int positionID, String positionName, boolean isTeaching, int payRate, int requiredHours) {
         DefaultTableModel model = (DefaultTableModel) positionTable.getModel();
         Object[] newRecord = {positionID, positionName, isTeaching, payRate, requiredHours};
         model.addRow(newRecord);
@@ -531,10 +555,24 @@ public class Dashboard extends javax.swing.JFrame {
         positionTable.repaint();
     }
 
-    public void generateTables(){
+    public void generateTables() {
         Database.readAllEmployeeRecord(this);
         Database.readAllDepartmentRecord(this);
         Database.readAllPositionRecord(this);
+    }
+
+    public static void centerWindow(Window window) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+
+        int windowWidth = window.getWidth();
+        int windowHeight = window.getHeight();
+
+        int x = (screenWidth - windowWidth) / 2;
+        int y = (screenHeight - windowHeight) / 2;
+
+        window.setLocation(x, y);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -563,6 +601,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane employeeTableScroll;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private java.awt.Label label2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel payrollText;
