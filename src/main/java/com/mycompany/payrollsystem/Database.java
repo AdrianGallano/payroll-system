@@ -191,7 +191,7 @@ public class Database {
         }
     }
 
-    public static void addRecord(String tableName, String positionName, boolean isTeaching, int payRate, int requiredHours) { // for employees
+    public static void addRecord(String tableName, String positionName, boolean isTeaching, int payRate, int requiredHours) {
 
         try {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -223,7 +223,7 @@ public class Database {
         }
     }
 
-    public static void addRecord(String tableName, String departmentName) { // for employees
+    public static void addRecord(String tableName, String departmentName) {
 
         try {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -332,7 +332,7 @@ public class Database {
             }
         }
         // Update data
-        // Delete data
+
 
     }
 
@@ -408,6 +408,69 @@ public class Database {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    // table
+    // objectID
+
+    public static void deleteRecord(String table, String column, String objectID){
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+
+            String deleteRecordStatement = String.format("DELETE FROM %s WHERE %s='%s'", table, column, objectID);
+
+            statement.executeUpdate(deleteRecordStatement);
+            System.out.println("Delete record successful!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+    }
+
+    public static void deleteRecord(String table, String column, int objectID){
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+
+            String deleteRecordStatement = String.format("DELETE FROM %s WHERE %s='%d'", table, column, objectID);
+
+            statement.executeUpdate(deleteRecordStatement);
+            System.out.println("Delete record successful!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
     }
 }
 
