@@ -5,26 +5,37 @@
 package com.mycompany.payrollsystem.UI.AddRecord;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+
 import javax.swing.UIManager;
+
 import com.mycompany.payrollsystem.Database;
+import com.mycompany.payrollsystem.PayrollSystem;
+import com.mycompany.payrollsystem.UI.Dashboard;
 
-/**
- *
- * @author Aid
- */
+import java.time.LocalDate;
+
 public class AddRecordEmployee extends javax.swing.JFrame {
+    static String zeroes;
+    static{
+        if(Database.CountOfEmployee < 9){
+            zeroes = "0000";
+        } else if (Database.CountOfEmployee > 9) {
+            zeroes = "000";
+        } else if (Database.CountOfEmployee > 99) {
+            zeroes = "00";
+        }else{
+            zeroes = "0";
+        }
+    }
+    private static String employeeID = Integer.toString(LocalDate.now().getYear()) + zeroes + Database.CountOfEmployee;
+    //Dinaya
 
-    /**
-     * Creates new form AddRecordEmployee
-     */
     public AddRecordEmployee() {
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
-        
-
         initComponents();
         Database.populateComboBox(employeeDepartmentSelection, "departmentName", "departments");
         Database.populateComboBox(employeePositionSelection, "positionName", "positions");
@@ -55,30 +66,20 @@ public class AddRecordEmployee extends javax.swing.JFrame {
         employeeFirstNameText.setForeground(new java.awt.Color(242, 242, 242));
         employeeFirstNameText.setText("First Name:");
 
-        employeeFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeFirstNameTextFieldActionPerformed(evt);
-            }
-        });
 
         employeeLastNameText.setForeground(new java.awt.Color(242, 242, 242));
         employeeLastNameText.setText("Last Name:");
 
-        employeeLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeLastNameTextFieldActionPerformed(evt);
-            }
-        });
 
         employeeDepartmentText.setForeground(new java.awt.Color(242, 242, 242));
         employeeDepartmentText.setText("Department:");
 
-        employeeDepartmentSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        employeeDepartmentSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         employeePositionText.setForeground(new java.awt.Color(242, 242, 242));
         employeePositionText.setText("Position: ");
 
-        employeePositionSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        employeePositionSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         addEmployeeButton.setText("Add Employee");
         addEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -90,52 +91,52 @@ public class AddRecordEmployee extends javax.swing.JFrame {
         javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
         container.setLayout(containerLayout);
         containerLayout.setHorizontalGroup(
-            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(containerLayout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addEmployeeButton)
-                    .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(containerLayout.createSequentialGroup()
-                            .addComponent(employeeFirstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(employeeFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(containerLayout.createSequentialGroup()
-                            .addComponent(employeeLastNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(employeeLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(containerLayout.createSequentialGroup()
-                            .addComponent(employeeDepartmentText, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(employeeDepartmentSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(containerLayout.createSequentialGroup()
-                            .addComponent(employeePositionText, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(employeePositionSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(175, Short.MAX_VALUE))
+                                .addGap(72, 72, 72)
+                                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(addEmployeeButton)
+                                        .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(containerLayout.createSequentialGroup()
+                                                        .addComponent(employeeFirstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(employeeFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(containerLayout.createSequentialGroup()
+                                                        .addComponent(employeeLastNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(employeeLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(containerLayout.createSequentialGroup()
+                                                        .addComponent(employeeDepartmentText, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(employeeDepartmentSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGroup(containerLayout.createSequentialGroup()
+                                                        .addComponent(employeePositionText, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(employeePositionSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addContainerGap(175, Short.MAX_VALUE))
         );
         containerLayout.setVerticalGroup(
-            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(containerLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(employeeFirstNameText)
-                    .addComponent(employeeFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(employeeLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(employeeLastNameText))
-                .addGap(18, 18, 18)
-                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(employeeDepartmentText)
-                    .addComponent(employeeDepartmentSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(employeePositionSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(employeePositionText))
-                .addGap(32, 32, 32)
-                .addComponent(addEmployeeButton)
-                .addContainerGap(70, Short.MAX_VALUE))
+                containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(containerLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(employeeFirstNameText)
+                                        .addComponent(employeeFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(employeeLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(employeeLastNameText))
+                                .addGap(18, 18, 18)
+                                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(employeeDepartmentText)
+                                        .addComponent(employeeDepartmentSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(employeePositionSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(employeePositionText))
+                                .addGap(32, 32, 32)
+                                .addComponent(addEmployeeButton)
+                                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         getContentPane().add(container, java.awt.BorderLayout.CENTER);
@@ -143,17 +144,19 @@ public class AddRecordEmployee extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void employeeFirstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeFirstNameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_employeeFirstNameTextFieldActionPerformed
 
-    private void employeeLastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeLastNameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_employeeLastNameTextFieldActionPerformed
-
-    private void addEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addEmployeeButtonActionPerformed
+    private void addEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        String firstName = employeeFirstNameTextField.getText();
+        String lastName = employeeLastNameTextField.getText();
+        String selectedEmployeeDepartment = (String) employeeDepartmentSelection.getSelectedItem();
+        String selectedEmployeePosition = (String) employeePositionSelection.getSelectedItem();
+        Database.CountOfEmployee++;
+        employeeID = Integer.toString(LocalDate.now().getYear()) + zeroes + Database.CountOfEmployee;
+        int selectedEmployeeDepartmentID = Database.readRecordWhere("departmentID", "departments", "departmentName", selectedEmployeeDepartment);
+        int selectedEmployeePositionID = Database.readRecordWhere("positionID", "positions", "positionName", selectedEmployeePosition);
+        Database.addRecord("employees", employeeID, firstName, lastName, selectedEmployeeDepartmentID, selectedEmployeePositionID);
+        Dashboard.generateTableEmployeeRecords(employeeID, firstName, lastName, selectedEmployeeDepartmentID, selectedEmployeePositionID);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

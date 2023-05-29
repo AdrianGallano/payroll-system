@@ -16,6 +16,7 @@ public class Database {
 
     private static Connection connection;
     private static Statement statement;
+    public static int CountOfEmployee = 0;
     private static String url = "jdbc:mysql://localhost:3306/";
     final private static String USERNAME = "root";
     final private static String PASSWORD = "";
@@ -127,6 +128,7 @@ public class Database {
                     + "lastName VARCHAR(50) NOT NULL,"
                     + "department INT NOT NULL,"
                     + "position INT NOT NULL,"
+                    + "PRIMARY KEY(employeeID),"
                     + "FOREIGN KEY (position) REFERENCES positions(positionID),"
                     + "FOREIGN KEY (department) REFERENCES departments(departmentID));";
 
@@ -157,7 +159,7 @@ public class Database {
 
     // Method overloading for add Record kasi we actually have 3 tables with same functionality
     // Employee
-    static void addRecord(String tableName, String employeeID, String firstName, String lastName, int departmentID, int positionID) { // for employees
+    public static void addRecord(String tableName, String employeeID, String firstName, String lastName, int departmentID, int positionID) { // for employees
 
         try {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -189,7 +191,7 @@ public class Database {
         }
     }
 
-    static void addRecord(String tableName, String positionName, boolean isTeaching, int payRate, int requiredHours) { // for employees
+    public static void addRecord(String tableName, String positionName, boolean isTeaching, int payRate, int requiredHours) { // for employees
 
         try {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -221,7 +223,7 @@ public class Database {
         }
     }
 
-    static void addRecord(String tableName, String departmentName) { // for employees
+    public static void addRecord(String tableName, String departmentName) { // for employees
 
         try {
             Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -269,6 +271,7 @@ public class Database {
                 String lastName = result.getString("lastName");
                 int department = result.getInt("department");
                 int position = result.getInt("position");
+                CountOfEmployee++;
                 dashboard.generateTableEmployeeRecords(employeeID, firstName, lastName, department, position);
             }
 
@@ -390,6 +393,21 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static int readRecordWhere(String column, String tableName, String where, String condition) {
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            String query = String.format("SELECT %s FROM %s WHERE %s='%s';", column, tableName, where, condition);
+            System.out.println(query);
+            ResultSet resultSet = statement.executeQuery(query);
+            resultSet.next();
+            return resultSet.getInt(column);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }
 

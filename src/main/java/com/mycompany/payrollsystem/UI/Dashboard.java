@@ -528,7 +528,7 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteDepartmentActionPerformed
 
-    public void generateTableEmployeeRecords(String employeeID, String firstName, String lastName, int department, int position) {
+    public static void generateTableEmployeeRecords(String employeeID, String firstName, String lastName, int department, int position) {
         DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
         Object[] newRecord = {employeeID, firstName, lastName, department, position};
         model.addRow(newRecord);
@@ -537,7 +537,7 @@ public class Dashboard extends javax.swing.JFrame {
         employeeTable.repaint();
     }
 
-    public void generateTableDepartmentRecords(int departmentID, String departmentName) {
+    public static void generateTableDepartmentRecords(int departmentID, String departmentName) {
         DefaultTableModel model = (DefaultTableModel) departmentTable.getModel();
         Object[] newRecord = {departmentID, departmentName};
         model.addRow(newRecord);
@@ -546,7 +546,7 @@ public class Dashboard extends javax.swing.JFrame {
         departmentTable.repaint();
     }
 
-    public void generateTablePositionRecords(int positionID, String positionName, boolean isTeaching, int payRate, int requiredHours) {
+    public static void generateTablePositionRecords(int positionID, String positionName, boolean isTeaching, int payRate, int requiredHours) {
         DefaultTableModel model = (DefaultTableModel) positionTable.getModel();
         Object[] newRecord = {positionID, positionName, isTeaching, payRate, requiredHours};
         model.addRow(newRecord);
@@ -588,7 +588,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton deletePosition;
     private javax.swing.JPanel departmentContainer;
     private java.awt.Label departmentLabel;
-    private javax.swing.JTable departmentTable;
+    private static javax.swing.JTable departmentTable;
     private javax.swing.JPanel departmentTablePanel;
     private javax.swing.JScrollPane departmentTableScroll;
     private javax.swing.JButton editDepartment;
@@ -596,7 +596,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton editPosition;
     private javax.swing.JPanel employeeContainer;
     private java.awt.Label employeeLabel;
-    private javax.swing.JTable employeeTable;
+    private static javax.swing.JTable employeeTable;
     private javax.swing.JPanel employeeTablePanel;
     private javax.swing.JScrollPane employeeTableScroll;
     private javax.swing.Box.Filler filler1;
@@ -607,7 +607,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel payrollText;
     private javax.swing.JPanel positionContainer;
     private java.awt.Label positionLabel;
-    private javax.swing.JTable positionTable;
+    private static javax.swing.JTable positionTable;
     private javax.swing.JPanel positionTablePanel;
     private javax.swing.JScrollPane positionTableScroll;
     private javax.swing.JPanel sidePanel;
