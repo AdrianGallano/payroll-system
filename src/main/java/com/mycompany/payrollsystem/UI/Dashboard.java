@@ -6,6 +6,7 @@ package com.mycompany.payrollsystem.UI;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.mycompany.payrollsystem.Database;
+import com.mycompany.payrollsystem.PayrollSystem;
 import com.mycompany.payrollsystem.UI.AddRecord.*;
 
 import java.awt.Dimension;
@@ -42,16 +43,17 @@ public class Dashboard extends javax.swing.JFrame {
         addEmployee = new javax.swing.JButton();
         editEmployee = new javax.swing.JButton();
         deleteEmployee = new javax.swing.JButton();
-        positionContainer = new javax.swing.JPanel();
-        positionLabel = new java.awt.Label();
-        addPosition = new javax.swing.JButton();
-        editPosition = new javax.swing.JButton();
-        deletePosition = new javax.swing.JButton();
         departmentContainer = new javax.swing.JPanel();
         departmentLabel = new java.awt.Label();
         addDepartment = new javax.swing.JButton();
         editDepartment = new javax.swing.JButton();
         deleteDepartment = new javax.swing.JButton();
+        positionContainer = new javax.swing.JPanel();
+        positionLabel = new java.awt.Label();
+        addPosition = new javax.swing.JButton();
+        editPosition = new javax.swing.JButton();
+        deletePosition = new javax.swing.JButton();
+        calculatePayroll = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         topMainPanel = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(50, 50), new java.awt.Dimension(0, 32767));
@@ -96,12 +98,12 @@ public class Dashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout topSidePanelGapLayout = new javax.swing.GroupLayout(topSidePanelGap);
         topSidePanelGap.setLayout(topSidePanelGapLayout);
         topSidePanelGapLayout.setHorizontalGroup(
-                topSidePanelGapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+            topSidePanelGapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         topSidePanelGapLayout.setVerticalGroup(
-                topSidePanelGapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+            topSidePanelGapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         topSidePanel.add(topSidePanelGap);
@@ -175,56 +177,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         sidePanel.add(employeeContainer);
 
-        positionContainer.setBackground(new java.awt.Color(38, 38, 38));
-        positionContainer.setPreferredSize(new java.awt.Dimension(200, 120));
-        positionContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
-
-        positionLabel.setAlignment(java.awt.Label.CENTER);
-        positionLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        positionLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        positionLabel.setForeground(new java.awt.Color(242, 242, 242));
-        positionLabel.setName(""); // NOI18N
-        positionLabel.setText("Position");
-        positionContainer.add(positionLabel);
-
-        addPosition.setBackground(new java.awt.Color(38, 38, 38));
-        addPosition.setForeground(new java.awt.Color(242, 242, 242));
-        addPosition.setText("Add record");
-        addPosition.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(242, 242, 242)));
-        addPosition.setPreferredSize(new java.awt.Dimension(120, 20));
-        addPosition.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addPositionActionPerformed(evt);
-            }
-        });
-        positionContainer.add(addPosition);
-
-        editPosition.setBackground(new java.awt.Color(38, 38, 38));
-        editPosition.setForeground(new java.awt.Color(242, 242, 242));
-        editPosition.setText("Edit record");
-        editPosition.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(242, 242, 242)));
-        editPosition.setPreferredSize(new java.awt.Dimension(120, 20));
-        editPosition.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editPositionActionPerformed(evt);
-            }
-        });
-        positionContainer.add(editPosition);
-
-        deletePosition.setBackground(new java.awt.Color(38, 38, 38));
-        deletePosition.setForeground(new java.awt.Color(242, 242, 242));
-        deletePosition.setText("Delete Record");
-        deletePosition.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(242, 242, 242)));
-        deletePosition.setPreferredSize(new java.awt.Dimension(120, 20));
-        deletePosition.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deletePositionActionPerformed(evt);
-            }
-        });
-        positionContainer.add(deletePosition);
-
-        sidePanel.add(positionContainer);
-
         departmentContainer.setBackground(new java.awt.Color(38, 38, 38));
         departmentContainer.setPreferredSize(new java.awt.Dimension(200, 120));
         departmentContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
@@ -275,6 +227,64 @@ public class Dashboard extends javax.swing.JFrame {
 
         sidePanel.add(departmentContainer);
 
+        positionContainer.setBackground(new java.awt.Color(38, 38, 38));
+        positionContainer.setPreferredSize(new java.awt.Dimension(200, 120));
+        positionContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
+
+        positionLabel.setAlignment(java.awt.Label.CENTER);
+        positionLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        positionLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        positionLabel.setForeground(new java.awt.Color(242, 242, 242));
+        positionLabel.setName(""); // NOI18N
+        positionLabel.setText("Position");
+        positionContainer.add(positionLabel);
+
+        addPosition.setBackground(new java.awt.Color(38, 38, 38));
+        addPosition.setForeground(new java.awt.Color(242, 242, 242));
+        addPosition.setText("Add record");
+        addPosition.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(242, 242, 242)));
+        addPosition.setPreferredSize(new java.awt.Dimension(120, 20));
+        addPosition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPositionActionPerformed(evt);
+            }
+        });
+        positionContainer.add(addPosition);
+
+        editPosition.setBackground(new java.awt.Color(38, 38, 38));
+        editPosition.setForeground(new java.awt.Color(242, 242, 242));
+        editPosition.setText("Edit record");
+        editPosition.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(242, 242, 242)));
+        editPosition.setPreferredSize(new java.awt.Dimension(120, 20));
+        editPosition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editPositionActionPerformed(evt);
+            }
+        });
+        positionContainer.add(editPosition);
+
+        deletePosition.setBackground(new java.awt.Color(38, 38, 38));
+        deletePosition.setForeground(new java.awt.Color(242, 242, 242));
+        deletePosition.setText("Delete Record");
+        deletePosition.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(242, 242, 242)));
+        deletePosition.setPreferredSize(new java.awt.Dimension(120, 20));
+        deletePosition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePositionActionPerformed(evt);
+            }
+        });
+        positionContainer.add(deletePosition);
+
+        sidePanel.add(positionContainer);
+
+        calculatePayroll.setText("Calculate Payroll");
+        calculatePayroll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calculatePayrollActionPerformed(evt);
+            }
+        });
+        sidePanel.add(calculatePayroll);
+
         container.add(sidePanel, java.awt.BorderLayout.WEST);
 
         mainPanel.setBackground(new java.awt.Color(13, 13, 13));
@@ -305,26 +315,26 @@ public class Dashboard extends javax.swing.JFrame {
         employeeTablePanel.setPreferredSize(new java.awt.Dimension(0, 0));
 
         employeeTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+            new Object [][] {
 
-                },
-                new String[]{
-                        "ID", "First name", "Last name", "Department", "Position"
-                }
+            },
+            new String [] {
+                "ID", "First name", "Last name", "Department", "Position"
+            }
         ) {
-            Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         employeeTableScroll.setViewportView(employeeTable);
@@ -339,37 +349,37 @@ public class Dashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout employeeTablePanelLayout = new javax.swing.GroupLayout(employeeTablePanel);
         employeeTablePanel.setLayout(employeeTablePanelLayout);
         employeeTablePanelLayout.setHorizontalGroup(
-                employeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(employeeTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+            employeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(employeeTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
         );
         employeeTablePanelLayout.setVerticalGroup(
-                employeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(employeeTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            employeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(employeeTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
         Overview.addTab("Employee", employeeTablePanel);
 
         departmentTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+            new Object [][] {
 
-                },
-                new String[]{
-                        "ID", "Name"
-                }
+            },
+            new String [] {
+                "ID", "Name"
+            }
         ) {
-            Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.String.class
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean[]{
-                    false, false
+            boolean[] canEdit = new boolean [] {
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         departmentTableScroll.setViewportView(departmentTable);
@@ -381,37 +391,37 @@ public class Dashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout departmentTablePanelLayout = new javax.swing.GroupLayout(departmentTablePanel);
         departmentTablePanel.setLayout(departmentTablePanelLayout);
         departmentTablePanelLayout.setHorizontalGroup(
-                departmentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(departmentTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+            departmentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(departmentTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
         );
         departmentTablePanelLayout.setVerticalGroup(
-                departmentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(departmentTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            departmentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(departmentTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
         Overview.addTab("Department", departmentTablePanel);
 
         positionTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+            new Object [][] {
 
-                },
-                new String[]{
-                        "ID", "Name", "Teaching / Non Teaching", "Pay rate", "Required Hours"
-                }
+            },
+            new String [] {
+                "ID", "Name", "Teaching / Non Teaching", "Pay rate", "Required Hours"
+            }
         ) {
-            Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Integer.class
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Integer.class
             };
-            boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         positionTableScroll.setViewportView(positionTable);
@@ -426,12 +436,12 @@ public class Dashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout positionTablePanelLayout = new javax.swing.GroupLayout(positionTablePanel);
         positionTablePanel.setLayout(positionTablePanelLayout);
         positionTablePanelLayout.setHorizontalGroup(
-                positionTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(positionTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+            positionTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(positionTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
         );
         positionTablePanelLayout.setVerticalGroup(
-                positionTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(positionTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            positionTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(positionTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
         Overview.addTab("Position", positionTablePanel);
@@ -441,12 +451,12 @@ public class Dashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
-                jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
-                jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         centerMainPanel.add(jDesktopPane1, new java.awt.GridBagConstraints());
@@ -455,18 +465,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         bottomMainPanel.setBackground(new java.awt.Color(13, 13, 13));
         bottomMainPanel.setPreferredSize(new java.awt.Dimension(100, 100));
-
-        javax.swing.GroupLayout bottomMainPanelLayout = new javax.swing.GroupLayout(bottomMainPanel);
-        bottomMainPanel.setLayout(bottomMainPanelLayout);
-        bottomMainPanelLayout.setHorizontalGroup(
-                bottomMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
-        );
-        bottomMainPanelLayout.setVerticalGroup(
-                bottomMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         mainPanel.add(bottomMainPanel, java.awt.BorderLayout.SOUTH);
 
         container.add(mainPanel, java.awt.BorderLayout.CENTER);
@@ -507,17 +505,23 @@ public class Dashboard extends javax.swing.JFrame {
         Database.deleteRecord("positions", "positionID", positionID);
     }//GEN-LAST:event_deletePositionActionPerformed
 
+    private void calculatePayrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculatePayrollActionPerformed
+        PayrollCalculator payrollCalculator = new PayrollCalculator();
+        centerWindow(payrollCalculator);
+        payrollCalculator.setVisible(true);
+    }//GEN-LAST:event_calculatePayrollActionPerformed
+
     private void addDepartmentActionPerformed(java.awt.event.ActionEvent evt) {
         AddRecordDepartment addRecordDepartment = new AddRecordDepartment();
         centerWindow(addRecordDepartment);
         addRecordDepartment.setVisible(true);
     }
 
-    private void editDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDepartmentActionPerformed
+    private void editDepartmentActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
     }
 
-    private void deleteDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDepartmentActionPerformed
+    private void deleteDepartmentActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         int departmentID = (Integer) processSelectedRow(departmentTable);
         Database.deleteRecord("departments", "departmentID", departmentID);
     }
@@ -590,6 +594,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton addEmployee;
     private javax.swing.JButton addPosition;
     private javax.swing.JPanel bottomMainPanel;
+    private javax.swing.JButton calculatePayroll;
     private javax.swing.JPanel centerMainPanel;
     private javax.swing.JPanel container;
     private javax.swing.JButton deleteDepartment;

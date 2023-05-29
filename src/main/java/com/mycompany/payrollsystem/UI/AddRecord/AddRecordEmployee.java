@@ -66,20 +66,11 @@ public class AddRecordEmployee extends javax.swing.JFrame {
         employeeFirstNameText.setForeground(new java.awt.Color(242, 242, 242));
         employeeFirstNameText.setText("First Name:");
 
-        employeeFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeFirstNameTextFieldActionPerformed(evt);
-            }
-        });
 
         employeeLastNameText.setForeground(new java.awt.Color(242, 242, 242));
         employeeLastNameText.setText("Last Name:");
 
-        employeeLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeLastNameTextFieldActionPerformed(evt);
-            }
-        });
+
 
         employeeDepartmentText.setForeground(new java.awt.Color(242, 242, 242));
         employeeDepartmentText.setText("Department:");

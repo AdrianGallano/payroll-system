@@ -2,11 +2,7 @@ package com.mycompany.payrollsystem;
 
 import com.mycompany.payrollsystem.UI.Dashboard;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import java.sql.*;
 import javax.swing.JComboBox;
 // Create -> INSERT INTO
 // Read -> SELECT
@@ -471,6 +467,85 @@ public class Database {
                 }
             }
         }
+    }
+
+    public static double getPayRate(String employeeID){
+        try {
+            double payRate;
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            String sql = "SELECT p.payRate FROM employees e "
+                    + "JOIN positions p ON e.position = p.positionID "
+                    + "WHERE e.employeeID = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, employeeID);
+            ResultSet resultSet = statement.executeQuery();
+
+            // Check if a result exists and retrieve the pay rate
+            if (resultSet.next()) {
+                payRate = (double) resultSet.getInt("payRate") ;
+                return payRate;
+            }
+            return -1;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+        return -1;
+    }
+
+    public static boolean getIsTeaching(String employeeID){
+        try {
+            Connection connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            String sql = "SELECT p.isTeaching FROM employees e "
+                    + "JOIN positions p ON e.position = p.positionID "
+                    + "WHERE e.employeeID = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, employeeID);
+            ResultSet resultSet = statement.executeQuery();
+
+            // Check if a result exists and retrieve the pay rate
+            if (resultSet.next()) {
+                boolean payRate = resultSet.getBoolean("isTeaching");
+                return payRate;
+            }
+            return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+        return false;
     }
 }
 
